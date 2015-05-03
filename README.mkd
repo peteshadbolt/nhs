@@ -1,1 +1,8 @@
-Scraping NHS data
+# NHS
+
+Scraping NHS data. Really a project to learn more about web development with Flask etc.
+
+* Threaded scraper w/ `requests`, `Queue`
+* Flask
+* SQLite
+* Mapbox
