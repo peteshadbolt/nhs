@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Catchment areas</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
+
+<div id='ya'>
+    ya {{ name }}
+</div>
+<div id='map'></div>
+<script>
+
+L.mapbox.accessToken = 'pk.eyJ1IjoicGV0ZXNoYWRib2x0IiwiYSI6Il9wNTQxNUUifQ.yZTAWXMJZVR29WM5O7ODbA';
+var map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([54.5, -2], 6);
+
+// Prepare the request
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange=function() {
+    if (xhr.readyState==4 && xhr.status==200) {
+        add_polygon(JSON.parse(xhr.responseText)); 
+    }
+}
+
+// Hit the server
+xhr.open("GET","/polygon/"+"A85007", true);
+xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+xhr.send();
+
+var add_polygon = function(poly){
+    var points = []
+    var x = 0;
+    var y = 0;
+    for (var i = 0; i<poly.points.length; i++){
+        points.push(L.latLng(poly.points[i][0], poly.points[i][1]));
+        x += poly.points[i][0];
+        y += poly.points[i][1];
+    }
+    x /= poly.points.length;
+    y /= poly.points.length;
+    var p = L.polygon(points);
+    map.addLayer(p);
+    map.setView([x, y]);
+    map.setZoom(12);
+}
+
+</script>
+
+</body>
+</html>
+
