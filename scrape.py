@@ -15,8 +15,8 @@ Scrapes catchment areas from primarycare.nhs.uk. Is this evil?
 
 # Regexes
 DATABASE = "practices.db"
-MAX_THREADS = 1
-THROTTLE = 1
+MAX_THREADS = 10
+THROTTLE = 0
 ROOT_URL = "https://www.primarycare.nhs.uk/publicfn/catchment.aspx"
 OCLISTFILE = "data/epraccur.csv"
 OCFINDER = re.compile(r"^\s*var\s*CC0\s*\=\s*\[new\sgoogle\.maps.*$", re.M)
