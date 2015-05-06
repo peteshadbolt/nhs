@@ -4,12 +4,8 @@ from flask import Flask, jsonify, request
 from flask import g
 from flask import render_template
 
-# Configuration
-DATABASE = "./practices.db"
-SECRET_KEY = "development key"
-
 app = Flask(__name__)
-app.config.from_object(__name__)
+app.config.from_envvar("NHS_SETTINGS")
 
 def connect_db():
     return sqlite3.connect(app.config["DATABASE"])
