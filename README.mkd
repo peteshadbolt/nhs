@@ -1,8 +1,8 @@
 # NHS
 
-Scraping NHS data. Really a project to learn more about web development with Flask etc.
+:see_no_evil: :hear_no_evil: :speak_no_evil: 
 
 * Threaded scraper w/ `requests`, `Queue`
 * Flask
-* SQLite
+* SQLite → Postgres
 * Mapbox
