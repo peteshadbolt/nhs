@@ -22,13 +22,13 @@ def teardown_request(exception):
 
 @app.route("/")
 def mainpage():
-    return render_template('index.html', name="eggboi")
+    return render_template('index.html', name="pete")
 
 @app.route("/polygon/<oc>", methods=["GET"])
 def polygon(oc):
     cur = g.db.execute("select name, polygon from practices where id='{:}'".format(oc))
     name, polygon = cur.fetchone()
-    polygon = eval(polygon) # TODO: OUCH
+    polygon = eval(polygon) # TODO: OUCH!
     return jsonify(oc = oc, name = name, points = polygon)
 
 if __name__ == "__main__":
